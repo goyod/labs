@@ -2,25 +2,12 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+
+	"github.com/goyod/labs/fizzbuzz"
 )
 
 func main() {
-	fmt.Println()
-}
-
-func FizzBuzz(n int) string {
-	if n%15 == 0 {
-		return "FizzBuzz"
+	for i := 1; i <= 100; i++ {
+		fmt.Print(fizzbuzz.FizzBuzz(i) + ",")
 	}
-
-	if n%5 == 0 {
-		return "Buzz"
-	}
-
-	if n%3 == 0 {
-		return "Fizz"
-	}
-
-	return strconv.Itoa(n)
 }

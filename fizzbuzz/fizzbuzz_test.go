@@ -1,9 +1,9 @@
-package main_test
+package fizzbuzz_test
 
 import (
 	"testing"
 
-	"github.com/goyod/labs"
+	"github.com/goyod/labs/fizzbuzz"
 )
 
 func TestFizzBuzzReturnsOriginNumber(t *testing.T) {
@@ -11,7 +11,7 @@ func TestFizzBuzzReturnsOriginNumber(t *testing.T) {
 	wants := []string{"1", "2", "4", "7", "8", "11", "13", "14", "16", "17", "19"}
 
 	for i, want := range wants {
-		get := main.FizzBuzz(given[i])
+		get := fizzbuzz.FizzBuzz(given[i])
 
 		if want != get {
 			t.Errorf("given %d wants %q but get %q\n", given, want, get)
@@ -24,7 +24,7 @@ func TestFizzBuzzReturnsFizzForMultiplesOfThree(t *testing.T) {
 	wants := "Fizz"
 
 	for _, give := range given {
-		get := main.FizzBuzz(give)
+		get := fizzbuzz.FizzBuzz(give)
 
 		if wants != get {
 			t.Errorf("given %d wants %q but get %q\n", give, wants, get)
@@ -37,7 +37,7 @@ func TestFizzBuzzReturnsBuzzForMultiplesOfFive(t *testing.T) {
 	wants := "Buzz"
 
 	for _, give := range given {
-		get := main.FizzBuzz(give)
+		get := fizzbuzz.FizzBuzz(give)
 
 		if wants != get {
 			t.Errorf("given %d wants %q but get %q\n", give, wants, get)
@@ -50,7 +50,7 @@ func TestFizzBuzzReturnsFizzBuzzForMultiplesOfFifteen(t *testing.T) {
 	wants := "FizzBuzz"
 
 	for _, give := range given {
-		get := main.FizzBuzz(give)
+		get := fizzbuzz.FizzBuzz(give)
 
 		if wants != get {
 			t.Errorf("given %d wants %q but get %q\n", give, wants, get)
