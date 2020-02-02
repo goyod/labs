@@ -60,5 +60,5 @@ func fizzbuzzHandler(c *gin.Context) {
 		return
 	}
 
-	c.String(http.StatusOK, fizzbuzz.FizzBuzz(n))
+	c.String(http.StatusOK, fizzbuzz.New(n).String())
 }

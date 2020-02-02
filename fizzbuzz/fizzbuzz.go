@@ -2,6 +2,16 @@ package fizzbuzz
 
 import "strconv"
 
+type Object int
+
+func New(n int) Object {
+	return Object(n)
+}
+
+func (o Object) String() string {
+	return FizzBuzz(int(o))
+}
+
 func FizzBuzz(n int) string {
 	if n%15 == 0 {
 		return "FizzBuzz"
