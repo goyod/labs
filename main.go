@@ -1,29 +1,25 @@
 package main
 
 import (
-	"io"
-	"log"
 	"net/http"
 	"strconv"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"github.com/goyod/labs/fizzbuzz"
 )
 
 func main() {
-	r := mux.NewRouter()
-	r.HandleFunc("/fizzbuzz/{number}", fizzbuzzHandler)
-	log.Fatal(http.ListenAndServe(":8080", r))
+	r := gin.Default()
+	r.GET("/fizzbuzz/:number", fizzbuzzHandler)
+	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
-func fizzbuzzHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	n, err := strconv.Atoi(vars["number"])
+func fizzbuzzHandler(c *gin.Context) {
+	n, err := strconv.Atoi(c.Param("number"))
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
+		c.String(http.StatusBadRequest, err.Error())
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	io.WriteString(w, fizzbuzz.FizzBuzz(n))
+	c.String(http.StatusOK, fizzbuzz.FizzBuzz(n))
 }
