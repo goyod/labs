@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"net/http"
 	"strconv"
 	"time"
@@ -13,6 +14,7 @@ import (
 
 func main() {
 	r := gin.Default()
+	r.GET("/fizzbuzzr", fizzbuzzRandomHandler)
 	r.GET("/fizzbuzz/:number", fizzbuzzHandler)
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
@@ -61,4 +63,21 @@ func fizzbuzzHandler(c *gin.Context) {
 	}
 
 	c.String(http.StatusOK, fizzbuzz.New(n).String())
+}
+
+func fizzbuzzRandomHandler(c *gin.Context) {
+	s := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(s)
+
+	n := r.Intn(100)
+
+	c.JSON(http.StatusOK, FizzbuzzResponse{
+		Number:  n,
+		Message: fizzbuzz.New(n).String(),
+	})
+}
+
+type FizzbuzzResponse struct {
+	Number  int    `json:"number"`
+	Message string `json:"message"`
 }
